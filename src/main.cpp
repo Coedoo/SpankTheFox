@@ -74,7 +74,7 @@ const float pitchVariation = 0.08f;
 // Menu
 // ================
 const Vector2 menuRectOffset = { 0, 220 };
-const Vector2 menuRectSize = { 700, 300 };
+const Vector2 menuRectSize = { 810, 330 };
 const int titleSize = 110;
 char titleText[] = "Spank the fox";
 
@@ -88,7 +88,8 @@ const int creditsMargin = 4;
 const int creditsSize = 40;
 char creditsText[] = R"###(Programing and "music": Coedo
 Fox art: Sick2day
-Screams: Tenma Maemi <3
+
+Thank you Tenma for amazing screams!
 )###";
 
 // ================
@@ -189,12 +190,12 @@ int sign(T val) {
 }
 
 float RandomRange(float a, float b) {
-    float p = (float) rand() / RAND_MAX;
+    float p = (float) rand() / (float) RAND_MAX;
     return Lerp(a, b, p);
 }
 
 int RandomRange(int a, int b) {
-    float p = (float) rand() / RAND_MAX;
+    float p = (float) rand() / (float) RAND_MAX;
     return (int) (Lerp((float)a, (float)b, p) + 0.5f);
 }
 
@@ -302,7 +303,9 @@ void UpdateDrawFrame()
 
     // Rendering
     BeginDrawing();
-    ClearBackground(LIGHTGRAY);
+    ClearBackground({219, 216, 225, 0});
+    // ClearBackground({242, 159, 203, 0});
+    // ClearBackground(LIGHTGRAY);
 
     if(isInMenu) {
         DrawMenu();

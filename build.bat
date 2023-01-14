@@ -4,8 +4,17 @@ if NOT "%Platform%" == "X64" IF NOT "%Platform%" == "x64" (call vcvarsall x64)
 
 set exe_name=SpankTheFox
 set compile_flags= -nologo /Zi /FC /I ../include/ /W3
-set linker_flags= raylibdll.lib gdi32.lib user32.lib kernel32.lib opengl32.lib /INCREMENTAL:NO
+set linker_flags= raylibdll.lib /INCREMENTAL:NO
 set linker_path="../bin/"
+
+
+if "%1" == "release" (
+    echo "BUILDING RELEASE!"
+    set compile_flags=%compile_flags% /O2
+    set linker_flags=%linker_flags% /SUBSYSTEM:windows /ENTRY:mainCRTStartup
+) else (
+    set compile_flags=%compile_flags%  /Zi
+)
 
 if not exist build mkdir build
 pushd build
