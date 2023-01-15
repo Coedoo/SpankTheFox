@@ -299,8 +299,6 @@ void UpdateDrawFrame()
         UpdateGame();
     }
 
-    FoxAnimationRoutine(&foxAnimationState);
-
     // Rendering
     BeginDrawing();
     ClearBackground({219, 216, 225, 0});
@@ -314,10 +312,14 @@ void UpdateDrawFrame()
         DrawGame();
     }
 
+    // DrawFPS(0, 0);
+
     EndDrawing();
 }
 
 void UpdateMenu() {
+    FoxAnimationRoutine(&foxAnimationState);
+
     if(IsMouseButtonPressed(0)) {
         isInMenu = false;
     }
@@ -343,6 +345,20 @@ void UpdateGame() {
         }
     }
     else if(foxHit == false) {
+        FoxAnimationRoutine(&foxAnimationState);
+
+        // cheat for testing maximum possible speed
+        // if(IsMouseButtonPressed(1)) {
+        //     ray = GetMouseRay({screenWidth, screenHeight}, camera);
+        //     dist = -ray.position.z / ray.direction.z;
+        //     previousPointerPos = ray.position + ray.direction * dist;
+
+
+        //     ray = GetMouseRay({0, 0}, camera);
+        //     dist = -ray.position.z / ray.direction.z;
+        //     pointerPosition = ray.position + ray.direction * dist;
+        // }
+
         // Calculate speed of the pointer in the World coordinates
         Vector3 delta = pointerPosition - previousPointerPos;
         Vector3 velocity = delta / GetFrameTime();
